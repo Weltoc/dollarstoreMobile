@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="DollarStore.View.MasterList">
+  <ContentView.Content>
+      <StackLayout Padding="0" Margin="0" HorizontalOptions="FillAndExpand">
+            <ListView x:Name="masterList"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="50">
+                            <Grid BackgroundColor="{Binding BackgroundColor}"
+                                  ColumnDefinitions="Auto,*"
+                                  RowDefinitions="Auto, Auto">
+
+                                <Image Grid.Column="0" 
+                                       BackgroundColor="Transparent"
+                                       Margin="15,10,0,10"
+                                       Source="{Binding IconSource}"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"                                      
+                                       HeightRequest="20" />
+                                
+                                <Label Grid.Column="1" Text="{Binding Title}"
+                                       FontSize="17"
+                                       TextColor="Black"
+                                       VerticalOptions="Center"/>
+
+                                <BoxView BackgroundColor="#F2F2F2"
+                                         HeightRequest="0.5"
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="Start"
+                                         Grid.Row="1"
+                                         Grid.ColumnSpan="2" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+      </StackLayout>
+  </ContentView.Content>
+</ContentView>

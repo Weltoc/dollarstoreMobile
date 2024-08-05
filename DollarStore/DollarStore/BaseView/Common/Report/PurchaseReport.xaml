@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:pk="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:cm="clr-namespace:DollarStore.Common.Converter"
+             x:Class="DollarStore.Common.Report.PurchaseReport">
+
+
+    <ContentPage.Resources>
+
+        <ResourceDictionary>
+            <cm:ImageNameConverter x:Key="ImageSourceKey" />
+        </ResourceDictionary>
+
+        <DataTemplate x:Key="reportT">
+            <pk:PancakeView
+                        CornerRadius="20"
+                        Padding="0,0,0,10"
+                        BackgroundColor="White">
+
+                <Grid BackgroundColor="Transparent"
+                                     RowDefinitions="Auto,*"
+                                     ColumnSpacing="10"
+                                      Margin="0"
+                                      Padding="0">
+
+                    <pk:PancakeView Padding="0" CornerRadius="0"
+                                           Margin="0" 
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center">
+
+                        <OnIdiom x:TypeArguments="Image">
+                            <OnIdiom.Tablet>
+                                <Image Source="{Binding ImageUrl, Converter={StaticResource ImageSourceKey}}"
+                                                       BackgroundColor="Transparent"
+                                                       Margin="0"  
+                                                       Aspect="Fill"
+                                                       HeightRequest="250"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand">
+                                </Image>
+                            </OnIdiom.Tablet>
+                            <OnIdiom.Phone>
+                                <Image Source="{Binding ImageUrl, Converter={StaticResource ImageSourceKey}}"
+                                                       BackgroundColor="Transparent"
+                                                       Margin="0"  
+                                                       Aspect="Fill"
+                                                       HeightRequest="180"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand">
+                                </Image>
+                            </OnIdiom.Phone>
+                        </OnIdiom>
+
+                    </pk:PancakeView>
+
+                    <pk:PancakeView BackgroundColor="#FBD31F"
+                                                    Grid.Row="0"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Start"
+                                                    Padding="10"
+                                                    CornerRadius="0,20,20,0">
+                        <Label Text="{Binding Quantity}"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               FontSize="Body"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                    </pk:PancakeView>
+
+                    <Grid Grid.Row="1"
+                           RowDefinitions="Auto,Auto">
+
+                        <Label HorizontalOptions="Start" FontAttributes="Bold"
+                                               Padding="10,5,0,0" FontSize="14"
+                                               TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="UPC : " FontSize="14" FontAttributes="Bold"/>
+                                    <Span Text="{Binding ItemBarcode}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label HorizontalOptions="Start" FontAttributes="Bold"
+                                               Padding="10,25,0,0" FontSize="14"
+                                               TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Internal id : " FontSize="14" FontAttributes="Bold"/>
+                                    <Span Text="{Binding InternalId}"  FontSize="11" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="{Binding ItemName}"
+                                           Grid.Row="1"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                           FontSize="12" TextColor="Gray"
+                                           MaxLines="3"
+                                           VerticalTextAlignment="End"
+                                           Margin="10,0,10,0"
+                                           VerticalOptions="End" />
+
+                    </Grid>
+
+                </Grid>
+            </pk:PancakeView>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="Transparent"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand" >
+
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"  RowDefinitions="Auto, *"  BackgroundColor="#E5E6E6">
+                
+                <Grid ColumnDefinitions="Auto,Auto,*"
+                  RowDefinitions="Auto, Auto,Auto,Auto"
+                  HeightRequest="180"
+                  BackgroundColor="DodgerBlue">
+
+                    <Grid Padding="15"
+                      Margin="5"
+                      BackgroundColor="Transparent"
+                      HorizontalOptions="Start"
+                      VerticalOptions="Start">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackButton_Clicked" />
+                        </Grid.GestureRecognizers>
+
+                        <ImageButton Source="leftarrow.png"
+                                     BackgroundColor="Transparent"
+                                     WidthRequest="30"
+                                     HeightRequest="15"
+                                     VerticalOptions="Start"
+                                     HorizontalOptions="Start"
+                                     Clicked="BackButton_Clicked" >
+
+                            <ImageButton.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="BackButton_Clicked" />
+                            </ImageButton.GestureRecognizers>
+                        </ImageButton>
+
+                    </Grid>
+
+                    <Label Text="Report"
+                       Grid.Column="1"
+                       TextColor="White"
+                       VerticalOptions="Start"
+                       Margin="0,15"
+                       HorizontalOptions="Start"
+                       FontSize="Large"
+                       FontAttributes="Bold"/>
+
+                    <Label Text="Filter" TextColor="White"
+                       Padding="15" BackgroundColor="Transparent"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       Grid.Column="2">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ToolbarItem_Clicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Frame Grid.Row="1" BackgroundColor="White"
+                       CornerRadius="0" Margin="25,0,25,0"
+                       HorizontalOptions="Center" Grid.ColumnSpan="3"
+                       VerticalOptions="End" Padding="0,-1"  >
+                        <Grid ColumnDefinitions="*, Auto">
+                            <SearchBar  PlaceholderColor="LightGray"
+                                    x:Name="searchReport"
+                                    SearchCommand="{Binding SearchItemCommand}"
+                                    SearchCommandParameter="{Binding Text, Source={x:Reference searchReport}}"
+                                    SearchButtonPressed="SearchReport_SearchButtonPressed"
+                                    TextChanged="SearchReport_TextChanged"
+                                    Placeholder="Search ... "/>
+
+                            <BoxView BackgroundColor="White" HeightRequest="2"
+                             HorizontalOptions="FillAndExpand" 
+                             Grid.ColumnSpan="2"    
+                             VerticalOptions="End"/>
+                            <ImageButton Grid.Column="1"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Center"
+                                     Source="scan.png"
+                                     HeightRequest="50"
+                                     Padding="5"
+                                     BackgroundColor="Transparent"
+                                     Clicked="Scan_ImageButton_Clicked"
+                                     WidthRequest="50" />
+                        </Grid>
+                    </Frame>
+
+                    <pk:PancakeView Grid.Row="2"
+                    BackgroundColor="White" Padding="10" Margin="0,10,0,0" 
+                    HorizontalOptions="Center" Grid.ColumnSpan="3">
+                        <Label FontAttributes="Bold" FontSize="Caption">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Status}" FontAttributes="Bold" FontSize="Caption" />
+                                    <Span Text=" P.O From " />
+                                    <Span Text="{Binding DateFrom}" FontAttributes="Bold" FontSize="Caption"/>
+                                    <Span Text=" To "/>
+                                    <Span Text="{Binding DateTo}" FontAttributes="Bold" FontSize="Caption"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </pk:PancakeView>
+                </Grid>
+
+                <RefreshView Grid.Row="1"  Margin="10, 0,10,0"  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                    RefreshColor="DodgerBlue"
+                                    VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="Center"
+                                    Command="{Binding GetReportCommand}">
+
+                    <CollectionView ItemsSource="{Binding LpurchaseReport}"
+                                            ItemTemplate="{StaticResource reportT}"
+                                        SelectionChanged="Report_collectionView_SelectionChanged"
+                                        SelectionMode="Single"
+                                        VerticalScrollBarVisibility="Always"                               
+                                        VerticalOptions="FillAndExpand"
+                                        BackgroundColor="Transparent">
+
+                        <CollectionView.ItemsLayout>
+                            <OnIdiom x:TypeArguments="GridItemsLayout">
+                                <OnIdiom.Tablet>
+                                    <GridItemsLayout Orientation="Vertical" Span="4" 
+                                                        VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                                </OnIdiom.Tablet>
+                                <OnIdiom.Phone>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" 
+                                                        VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                                </OnIdiom.Phone>
+                            </OnIdiom>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <StackLayout IsVisible="{Binding IsNotBusy}">
+                                <Label Text="No Item found" TextColor="Gray" 
+                                        HorizontalOptions="CenterAndExpand"
+                                            VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+
+                </RefreshView>
+
+            </Grid>
+
+            <ScrollView Orientation="Vertical" 
+                            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"                             
+                            AbsoluteLayout.LayoutBounds="0,1,1,AutoSize">
+                <Expander 
+                            x:Name="filterfab">
+                    <StackLayout                        
+                                Margin="0" BackgroundColor="White"
+                                    VerticalOptions="End"                           
+                                    HorizontalOptions="FillAndExpand">
+
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                                VerticalOptions="Start"
+                                Margin="0" Padding="15"
+                                HorizontalOptions="FillAndExpand">
+
+                            <Button x:Name="backbtn" Grid.Column="0"
+                                BackgroundColor="DodgerBlue"
+                                Text="&#171; BACK "
+                                FontSize="15"
+                                TextColor="White"
+                                Clicked="Back_Button_Tapped"/>
+
+                            <Button x:Name="Apply" Grid.Column="2" 
+                                Text="Apply &#187;"
+                                BorderColor="DodgerBlue" 
+                                BackgroundColor="DodgerBlue"
+                                FontSize="15"
+                                Clicked="Apply_Clicked"
+                                TextColor="White" />
+
+                        </Grid>
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" Padding="10">
+
+                            <StackLayout Padding="10" Grid.Row="0"
+                                    BackgroundColor="White">
+                                <Label Text="Filter by status"
+                                FontAttributes="Bold"
+                                TextColor="Black"
+                                FontSize="15"/>
+
+                                <Grid ColumnDefinitions="{OnIdiom Phone='*,*,*', Tablet='*,*,*,*,*,Auto'}"
+                                        RowDefinitions="{OnIdiom Phone='Auto, Auto,Auto,Auto', Tablet='Auto, Auto'}">
+
+                                    <RadioButton x:Name="Currentbtnradio"
+                                                    Text="In progress"
+                                                    HorizontalOptions="Center"
+                                                    GroupName="FilterByStatus"
+                                                    CheckedChanged="RadioButton_CheckedChanged"
+                                                    Opacity="0"/>
+                                    
+                                    <RadioButton Grid.Column="0"
+                                            Text="Closed"
+                                                    HorizontalOptions="Center"
+                                            TextColor="Black"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+                                    
+
+                                    <Label Text="Closed"
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Start"
+                                            />
+                                    
+                                    <RadioButton Grid.Column="1"
+                                            Text="Pending"
+                                            x:Name="pendingRadioBtn"
+                                                    HorizontalOptions="Center"
+                                            TextColor="Black"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+                                    
+                                    <Label Text="Pending"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            />
+                                    
+                                    <RadioButton Grid.Column="2"
+                                            Text="New"
+                                            x:Name="newRadiobtn"
+                                            HorizontalOptions="Center"
+                                            TextColor="Black"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+                                    
+                                    <Label Text="New"
+                                            HorizontalOptions="Center"
+                                            Grid.Row="1"
+                                            Grid.Column="2"
+                                            />
+
+                                    <RadioButton Grid.Column="{OnIdiom Tablet=3, Phone=0}"
+                                                    Grid.Row="{OnIdiom Tablet=0, Phone=2}"
+                                                    HorizontalOptions="Center"
+                                            Text="InShipping"
+                                            TextColor="Black"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+
+                                    <Label Text="InShipping"
+                                            Grid.Column="{OnIdiom Tablet=3, Phone=0}"
+                                            HorizontalOptions="Center"
+                                                    Grid.Row="{OnIdiom Tablet=1, Phone=3}"
+                                            />
+
+                                    <RadioButton Grid.Column="{OnIdiom Tablet=4, Phone=1}"
+                                                    Grid.Row="{OnIdiom Tablet=0, Phone=2}"
+                                            Text="Shipped"
+                                            HorizontalOptions="Center"
+                                            TextColor="Black"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+                                    <Label Text="Shipped"
+                                            HorizontalOptions="Center"
+                                            Grid.Column="{OnIdiom Tablet=4, Phone=1}"
+                                            Grid.Row="{OnIdiom Tablet=1, Phone=3}"
+                                            />
+                                    <RadioButton Grid.Column="{OnIdiom Tablet=5, Phone=2}"
+                                                    Grid.Row="{OnIdiom Tablet=0, Phone=2}"
+                                            x:Name="allRadioBtn"
+                                            Text="All"
+                                            TextColor="Black"
+                                            IsChecked="True"
+                                            HorizontalOptions="Center"
+                                            CheckedChanged="RadioButton_CheckedChanged"
+                                            GroupName="FilterByStatus"/>
+                                    <Label Text="All"
+                                            Grid.Column="{OnIdiom Tablet=5, Phone=2}"
+                                                    Grid.Row="{OnIdiom Tablet=1, Phone=3}"
+                                            HorizontalOptions="Center"
+                                            HorizontalTextAlignment="Center"
+                                            />
+
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout Padding="10" Grid.Row="1"
+                                    BackgroundColor="White">
+                                <Label Text="Filter by date" 
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                TextColor="Black" />
+                                <Grid ColumnDefinitions="Auto,*,Auto,*,Auto">
+
+                                    <Label Text="From" Grid.Column="0"
+                                    VerticalOptions="Center"/>
+
+
+                                    <Entry x:Name="DateFromEntry"
+                                    Text="{Binding DateFrom}"
+                                    IsReadOnly="True"
+                                    Grid.Column="1"                              
+                                    BackgroundColor="Transparent"
+                                    />
+                                    <DatePicker MinimumDate="01/01/2000"
+                                        BackgroundColor="White"
+                                        Format="d"
+                                        Opacity="0"
+                                        DateSelected="DateFrom_DateSelected"
+                                        Grid.Column="1"/>
+
+                                    <Label Text="To" Grid.Column="2"
+                                    VerticalOptions="Center"/>
+
+
+                                    <Entry x:Name="DateToEntry"
+                                    Text="{Binding DateTo}"
+                                    IsReadOnly="True"
+                                    Grid.Column="3"
+                                    BackgroundColor="Transparent" />
+
+                                    <DatePicker BackgroundColor="White"                                  
+                                        Opacity="0"
+                                        MinimumDate="{Binding MinimumDate}"
+                                        DateSelected="Dateto_DateSelected"                                  
+                                        Grid.Column="3"/>
+
+                                    <Label Text="Clear"
+                                            TextColor="DodgerBlue"
+                                            FontSize="17"
+                                            Grid.Column="4"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="End">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ClearDate_Tapped" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                </Grid>
+                            </StackLayout>
+
+                            <StackLayout Padding="10" Grid.Row="2"
+                                    BackgroundColor="White">
+
+                                <Label Text="Filter by User"
+                                FontAttributes="Bold"
+                                TextColor="Black"
+                                FontSize="15"/>
+                                <Picker x:Name="pickerUser"
+                                ItemsSource="{Binding Users}"
+                                ItemDisplayBinding="{Binding Name}"
+                                BackgroundColor="Transparent"
+                                TextColor="LightGray"
+                                Title="Select User"/>
+
+                            </StackLayout>
+
+                            <StackLayout Padding="10" Grid.Row="3"
+                                    BackgroundColor="White">
+
+                                <Label Text="Filter by Vendor and Location"
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                TextColor="Black"/>
+
+                                <Grid ColumnDefinitions="*,*,Auto" ColumnSpacing="10">
+                                    <ActivityIndicator Grid.Column="0"
+                                                Color="DodgerBlue" 
+                                                IsRunning="{Binding IsBusy}"
+                                                IsVisible="{Binding IsBusy}"
+                                                HeightRequest="10"
+                                                WidthRequest="10"
+                                                HorizontalOptions="End" />
+
+                                    <Picker x:Name="pickerVendor" 
+                                    Title="Vendor" ItemsSource="{Binding TVendors}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding SelectVendor}"
+                                    IsEnabled="{Binding IsNotBusy}"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="FillAndExpand"
+                                    Grid.Column="0" />
+
+                                    <Picker x:Name="pickerStore"
+                                    ItemsSource="{Binding TShops}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding SelectShop}"
+                                    IsEnabled="{Binding IsNotBusy}"
+                                    SelectedIndexChanged="PickerStore_SelectedIndexChanged"
+                                    Title="Location"
+                                        HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="Transparent"
+                                    Grid.Column="1" />
+
+                                    <Label Text="Clear"
+                                            TextColor="DodgerBlue"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="End"
+                                            FontSize="17"
+                                            Grid.Column="2">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ClearVendor_Tapped" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </StackLayout>
+                        </Grid>
+
+                    </StackLayout>
+                </Expander>
+            </ScrollView>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

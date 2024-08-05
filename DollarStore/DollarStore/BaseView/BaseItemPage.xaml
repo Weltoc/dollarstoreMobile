@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pk="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:cm="clr-namespace:DollarStore.Common.Converter"
+             x:Class="DollarStore.BaseView.BaseItemPage" >
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+ New Product"
+                     Clicked="Add_ToolbarItem_Clicked"/> 
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cm:ImageNameConverter x:Key="ImageSourceKey" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="Auto, Auto ,*"> 
+                <Frame Padding="10,0,10,-2"
+                           Grid.Row="0"
+                           Margin="10,10,10,0"
+                           CornerRadius="20"
+                           HorizontalOptions="Center">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <SearchBar 
+                                Placeholder="search items..."
+                                PlaceholderColor="LightGray"
+                                Margin="0,0,0,-1"
+                                x:Name="searchItem"
+                                Text="{Binding SearchText}"
+                                TextChanged="SearchItem_TextChanged"
+                                SearchCommand="{Binding SearchCommand}"
+                                SearchCommandParameter="{Binding Text, Source={x:Reference searchItem}}"
+                                SearchButtonPressed="SearchItem_SearchButtonPressed"
+                                HorizontalOptions="Center" >
+                            <SearchBar.GestureRecognizers>
+                                <TapGestureRecognizer  Tapped="Search_TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                            </SearchBar.GestureRecognizers>
+                        </SearchBar>
+
+                        <BoxView Color="Transparent"
+                                 CornerRadius="10"
+                                 WidthRequest="160"
+                                 HeightRequest="60"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="FillAndExpand">
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer  Tapped="Search_TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+
+                        <ImageButton Grid.Column="1"
+                                         Source="scan.png"
+                                         BackgroundColor="Transparent"
+                                         Clicked="Scan_ImageButton_Clicked"
+                                         HeightRequest="30"/>
+
+                        </Grid>
+                    </Frame>
+
+                <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto" Margin="20, 0,0,10" x:Name="lastestProd" >
+                    <Image Source="pending.png" 
+                           HeightRequest="20" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           WidthRequest="20" />
+                    <Label Text="latest updated items"
+                           Padding="10"
+                           FontSize="Body"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Start"
+                           HorizontalTextAlignment="Start"
+                           Grid.Column="1" />
+                </Grid>
+
+                <RefreshView x:Name="refreshview"
+                             Grid.Row="2"
+                             IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                             Command="{Binding LoadLatestItemsCommand}">
+                    <CollectionView x:Name="collectionItem"                       
+                          ItemsSource="{Binding AItems}" 
+                          BackgroundColor="Transparent" Visual="Material"             
+                          SelectionMode="Single"
+                          HorizontalScrollBarVisibility="Never"
+                          SelectionChanged="CollectionItem_SelectionChanged">
+
+                        <CollectionView.EmptyView>
+                            <StackLayout IsVisible="{Binding IsNotBusy}" Margin="0,50,0,0">
+                                <Label Text="No match Item found" TextColor="Gray" 
+                                   HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="StartAndExpand" />
+                            </StackLayout>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout x:Name="outerStack"
+                                             Orientation="Vertical" Span="{OnIdiom Phone=3, Tablet=5}" 
+                                             VerticalItemSpacing="{OnIdiom Phone=6, Tablet=6}"
+                                             HorizontalItemSpacing="{OnIdiom Phone=3, Tablet=5}"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            
+                            <DataTemplate>
+
+                                <pk:PancakeView
+                                    CornerRadius="0"
+                                     BackgroundColor="Transparent"
+                                    >
+                                    <Grid BackgroundColor="Transparent"
+                                     RowDefinitions="Auto,*"
+                                     ColumnSpacing="5"
+                                      Margin="0"
+                                      Padding="5">
+
+                                        <pk:PancakeView Padding="0" CornerRadius="0"
+                                           Margin="0"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           HeightRequest="90" WidthRequest="90">
+
+                                            <Image
+                                               BackgroundColor="Transparent"
+                                               Margin="0"   Aspect="AspectFill"
+                                               Source="{Binding ImageUrl, Converter={StaticResource ImageSourceKey}}"
+                                               HorizontalOptions="Center"
+                                               >
+
+                                                <!--<Image.Source>
+                                                    <UriImageSource Uri="{Binding ImageUrl, Converter={StaticResource ImageSourceKey}}"
+                                                                CacheValidity="5"
+                                                                CachingEnabled="True" />
+                                                </Image.Source>-->
+                                            </Image>
+
+                                        </pk:PancakeView>
+                                        <pk:PancakeView VerticalOptions="StartAndExpand" HorizontalOptions="Start"
+                                                        IsVisible="true"
+                                                        BackgroundColor="#fff" 
+                                                        CornerRadius="20" 
+                                                        WidthRequest="20" HeightRequest="20" Padding="2"
+                                                        >
+                                            <pk:PancakeView.Border>
+                                                <pk:Border Color="#6c757d" Thickness="1" />
+                                            </pk:PancakeView.Border>
+                                            <Label
+                                               TextColor="#6c757d"
+                                                VerticalTextAlignment="Center"
+                                                HorizontalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        
+                                                        <Span Text="{Binding QuantityAvailable}"
+                                                              FontSize="10"
+                                                              FontAttributes="Bold"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </pk:PancakeView>
+                                        <!--<pk:PancakeView VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                                        IsVisible="true"
+                                                        BackgroundColor="#fff" CornerRadius="1"
+                                                        WidthRequest="15" HeightRequest="25" Padding="2">
+                                            <Label
+                                               TextColor="Black">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Po:" FontAttributes="Bold"
+                                                              FontSize="7"/>
+                                                        <Span Text="{Binding QuantityInPO}"
+                                                              FontSize="10"
+                                                              FontAttributes="Bold"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </pk:PancakeView>-->
+                                        <!--<pk:PancakeView VerticalOptions="EndAndExpand" HorizontalOptions="Start"
+                                                        IsVisible="true"
+                                                        CornerRadius="1"
+                                                        WidthRequest="25" HeightRequest="25" Padding="2">
+                                            <Label
+                                               TextColor="Gray">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Ship:" FontAttributes="Bold"
+                                                              FontSize="7"/>
+                                                        <Span Text="{Binding QuantityInShpping}"
+                                                              FontSize="10"
+                                                              FontAttributes="Bold"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </pk:PancakeView>-->
+                                        
+                                        
+                                        <pk:PancakeView VerticalOptions="Start" HorizontalOptions="End"
+                                                        IsVisible="{Binding HasChilds}"
+                                                        BackgroundColor="#198754" CornerRadius="20"
+                                                        WidthRequest="20" HeightRequest="20" Padding="2" >
+                                            <Label Text="PK" FontSize="10" TextColor="#fff" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                                        </pk:PancakeView>
+                                        <!--<pk:PancakeView VerticalOptions="Start" HorizontalOptions="End"
+                                                        IsVisible="{Binding HasChilds}"
+                                                        BackgroundColor="LightGreen" CornerRadius="20"
+                                                        WidthRequest="20" HeightRequest="20" Padding="2" >
+                                            <Label Text="QT" FontSize="10" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                                        </pk:PancakeView>-->
+
+                                        <Grid Grid.Row="1"
+                                              RowSpacing="2"
+                                          RowDefinitions="Auto,Auto"
+                                          ColumnDefinitions="*, Auto">
+                                           
+                                            <Label HorizontalOptions="Center"
+                                               TextColor="Black">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="UPC : " FontAttributes="Bold"
+                                                              FontSize="7"/>
+                                                        <Span Text="{Binding UPC}"
+                                                              FontSize="10"
+                                                              FontAttributes="Bold"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label Text="{Binding Name}"
+                                           Grid.Row="1" Grid.ColumnSpan="2"
+                                           HorizontalOptions="Center"
+                                           MaxLines="2"
+                                           HorizontalTextAlignment="Center"
+                                           FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                           FontSize="10" TextColor="Gray"
+                                           VerticalOptions="End" />
+                                        </Grid>
+
+
+                                    </Grid>
+                                </pk:PancakeView>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

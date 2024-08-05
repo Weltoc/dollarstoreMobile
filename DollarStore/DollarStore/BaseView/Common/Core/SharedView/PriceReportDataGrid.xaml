@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DollarStore.BaseView.Common.Core.SharedView.PriceReportDataGrid">
+  <ContentView.Content>
+        <StackLayout>
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="1" MinimumHeightRequest="70">
+                <Frame BackgroundColor="DodgerBlue">
+                    <Label Padding="2" HorizontalOptions="CenterAndExpand" TextColor="White">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Vendor" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
+                <Frame Grid.Column="1" BackgroundColor="DodgerBlue">
+                    <Label Padding="2" HorizontalOptions="CenterAndExpand" TextColor="White">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Price" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
+                <Frame  Grid.Column="2" BackgroundColor="DodgerBlue">
+                    <Label Padding="2" HorizontalOptions="CenterAndExpand" TextColor="White">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Update At" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
+
+            </Grid>
+         
+            <ListView SelectionMode="None" HasUnevenRows="True" ItemsSource="{Binding ListItemVendor}" RowHeight="-1">
+            <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <ScrollView>
+                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="1" Margin="0,0,0,1">
+                                    <ScrollView>
+                                        <Frame Padding="2" HeightRequest="60">
+                                            <StackLayout>
+                                                <Label Padding="2" HorizontalOptions="Start" VerticalOptions="CenterAndExpand" TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Name}" FontAttributes="Bold" />
+                                                            <Span Text=" ( " FontAttributes="Bold" />
+                                                            <Span Text="{Binding InCart}" FontAttributes="Bold" />
+                                                            <Span Text=" )" FontAttributes="Bold" />
+                                                            <Span Text=" " FontAttributes="Bold" />
+                                                            <Span Text=" " FontAttributes="Bold" />
+                                                            <Span Text="{Binding ItemCode}" FontAttributes="Bold" />
+                                                            <Span Text=" " FontAttributes="Bold" />
+                                                            <Span Text=" " FontAttributes="Bold" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+
+                                        </Frame>
+                                    </ScrollView>
+
+                                    <Frame Grid.Column="1" Padding="2">
+                                        <ListView ItemsSource="{Binding Prices}" SelectionMode="None" RowHeight="50" SeparatorVisibility="Default" HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell>
+                                                        <Label Padding="2" HorizontalOptions="CenterAndExpand" TextColor="Black">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="$" FontAttributes="Bold" />
+                                                                    <Span Text="{Binding Price}"  FontAttributes="Bold" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Frame>
+
+                                    <Frame Grid.Column="2" Padding="2">
+                                        <ListView ItemsSource="{Binding Prices}" SelectionMode="None" RowHeight="50" SeparatorVisibility="Default" HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <ViewCell>
+                                                        <Label Padding="2" HorizontalOptions="CenterAndExpand" TextColor="Black">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding UpdateAt}"  FontAttributes="Bold" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </ViewCell>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Frame>
+                                </Grid>
+                            </ScrollView>
+                        </ViewCell>
+                       
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

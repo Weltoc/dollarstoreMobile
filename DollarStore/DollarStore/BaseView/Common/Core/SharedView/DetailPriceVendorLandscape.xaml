@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cm="clr-namespace:DollarStore.Common.Converter" 
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+             x:Class="DollarStore.Common.Core.SharedView.DetailPriceVendorLandscape">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <cm:DateTimeConverter x:Key="DateTimeToString"/>
+        </ResourceDictionary> 
+    </ContentView.Resources>
+    <Grid ColumnDefinitions="Auto,Auto" Margin="0,0,5,0">
+        
+        <Grid  RowDefinitions="*,*" >
+            
+        <Frame Margin="10" CornerRadius="0" 
+                   Padding="0"
+                   HorizontalOptions="{OnIdiom Phone='FillAndExpand', Tablet='Start'}"
+                   HeightRequest="300"
+                   HasShadow="True">
+
+            <Grid HorizontalOptions="FillAndExpand">
+                <Image Aspect="Fill"
+                           Source="{Binding ItemD.ImageUrl}"
+                           HorizontalOptions="CenterAndExpand"
+                            HeightRequest="400"
+                            WidthRequest="280"
+                           VerticalOptions="CenterAndExpand">
+                </Image>
+            </Grid>
+        </Frame>
+        <Frame Grid.Row="1">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*"  Padding="2" RowSpacing="5 " x:Name="rigthDetail" >
+                <Label TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"  Text="InternalId: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.InternalId}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="1" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Barcode: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="1" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.Barcode}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="2"  FontAttributes="Bold" TextColor="Black">
+                    <Label.FormattedText >
+                        <FormattedString>
+                            <Span Text="Name : "  FontAttributes="Bold"  FontSize="16" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Grid Grid.Row="2" ColumnDefinitions="Auto,*" RowDefinitions="Auto"  Grid.Column="1">
+                        <Label Grid.Column="1" Text="{Binding ItemD.Name}" HorizontalTextAlignment="Start"/>
+                </Grid>
+
+                <Label Grid.Row="3" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold"  Text="RefEquivalence: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="3" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.RefEquivalence}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="4" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Threshold: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="4" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.Threshold}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="5" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Last Buy Price: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="5" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.LastBuyPrice, StringFormat='${0}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="6" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Stock Price: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="6" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.NewPrice}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="7" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Description: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="7" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.Description}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="8" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Item Clsass: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="8" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.ItemClsass}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="9" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Category: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="9" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.Categorie}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="10" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Last Sale Date: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="10" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.SaleDate, Converter={StaticResource DateTimeToString}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="11" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Reception Date: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="11" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.ReceptionDate, Converter={StaticResource DateTimeToString}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="12" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Latest Sync at: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="12" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                                <Span Text="{Binding ItemD.NewLocalPriceUpdateAt, Converter={StaticResource DateTimeToString}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="13" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Updated by: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="13" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ItemD.LastUpdatedBy.UserName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="14" TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontAttributes="Bold" Text="Updated date: " />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Grid.Row="14" TextColor="Black" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ItemD.LastUpdatedBy.UpdateAt, Converter={StaticResource DateTimeToString}}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+        </Frame>
+    </Grid>
+        <Frame Grid.Column="1" >
+
+        </Frame>
+    </Grid>
+    
+
+</ContentView>

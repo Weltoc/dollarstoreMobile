@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cm="clr-namespace:DollarStore.Common.Converter"
+             xmlns:cm2="clr-namespace:DollarStore.BaseView.Common.Converter"
+             x:Class="DollarStore.Common.Core.SharedView.ImageViewForItemModel">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <cm:DateTimeConverter x:Key="DateTimeToString"/>
+            <cm2:TimestampToDateTimeToStringConverter x:Key="TimestampToDateTimeToString"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+      
+        <Grid ColumnDefinitions="Auto, *">
+        <Frame Margin="10" CornerRadius="0" 
+                   Padding="0"
+                   HorizontalOptions="{OnIdiom Phone='FillAndExpand', Tablet='Start'}"
+                   HeightRequest="{OnIdiom Phone='400', Tablet='700'}"
+                   HasShadow="True">
+
+            <Grid HorizontalOptions="FillAndExpand">
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+                <Image Aspect="Fill"
+                           Source="{Binding ImageUrl}"
+                           HorizontalOptions="CenterAndExpand"
+                            HeightRequest="400"
+                            WidthRequest="280"
+                           VerticalOptions="CenterAndExpand">
+                </Image>
+
+                <Expander VerticalOptions="End"
+                                 x:Name="detailInfo"
+                                 HorizontalOptions="FillAndExpand">
+
+                    <ScrollView>
+                        <StackLayout BackgroundColor="Black" 
+                                         HorizontalOptions="Start"
+                                         WidthRequest="500"
+                                         MinimumHeightRequest="{OnIdiom Phone='400', Tablet='600'}"
+                                        Opacity="0.7" Padding="10">
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="2" />
+                            </StackLayout.GestureRecognizers>
+
+                            <Grid ColumnDefinitions="Auto, Auto"  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+                                <Label Text="Internal Id" 
+                                       FontAttributes="Bold"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1"  Text="{Binding InternalId}" 
+                                       FontAttributes="Bold"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"/>
+
+                                <Label Grid.Row="2" Text="Bar code" 
+                                       FontAttributes="Bold"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Row="2" Grid.Column="1"  Text="{Binding UPC}" 
+                                       FontAttributes="Bold"
+                                       x:Name="codebareName"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="CopieCodebareTapGestureRecognizer_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label Grid.Row="3" Text="Name"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="3" Text="{Binding Name}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Grid.Row="4" Text="Threshold"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="4" Text="{Binding Threshold}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="5" Text="Last Buy Price"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="5" Text="{Binding LastBuyPrice, StringFormat='${0}'}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="6" Text="Stock Price"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="6" Text="{Binding NewPrice}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Grid.Row="7" Text="Ref Equivalence" 
+                                       FontAttributes="Bold"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="7" Text="{Binding RefEquivalence}" 
+                                       FontAttributes="Bold"
+                                       FontSize="Caption" TextColor="White"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"/>
+
+                                <Label Grid.Row="8" Text="Description"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="8" Text="{Binding Description}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Grid.Row="9" Text="Item Clsass"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="9" Text="{Binding ItemClsass}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Grid.Row="10" Text="Category"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="10" Text="{Binding Categorie}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+
+
+                                <Label  Grid.Row="11" Text="Last Sale Date"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="11" Text="{Binding SaleDate, Converter={StaticResource TimestampToDateTimeToString}}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="12" Text="Reception Date"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="12" Text="{Binding ReceptionDate, Converter={StaticResource TimestampToDateTimeToString}}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="13" Text="Latest Sync at"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="13" Text="{Binding NewLocalPriceUpdateAt, Converter={StaticResource TimestampToDateTimeToString}}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="14" Text="Updated by"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="14" Text="{Binding ItemD.LastUpdatedBy.UserName}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label  Grid.Row="15" Text="Updated date"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+
+                                <Label Padding="20, 0,0,0" Grid.Column="1" Grid.Row="15" Text="{Binding ItemD.LastUpdatedBy.UpdateAt, Converter={StaticResource TimestampToDateTimeToString}}"
+                                       TextColor="White"
+                                       FontFamily="Sansation-Regular.ttf#Sansation-Regular"
+                                       HorizontalOptions="Start"
+                                       HorizontalTextAlignment="Start"
+                                       FontSize="Caption"/>
+                            </Grid>
+                        </StackLayout>
+                    </ScrollView>
+
+
+                </Expander>
+
+            </Grid>
+        </Frame>
+    </Grid> 
+</ContentView>

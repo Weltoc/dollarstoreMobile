@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pk="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="DollarStore.BaseView.BaseHomePage"
+             Title="Home"
+             BackgroundColor="#F5F6F6">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+           
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Grid RowDefinitions="{OnIdiom Phone='Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto', Tablet='Auto,Auto,Auto,Auto,Auto' }"
+                      ColumnDefinitions="{OnIdiom Phone='*', Tablet='*,*'}"
+                      Padding="15,35,15,10" 
+                      VerticalOptions="StartAndExpand">
+
+                    <Frame Grid.Row="0">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="PurchaseOrder_Tapped" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="purchaseorders.png"
+                                       HeightRequest="40"
+                                       Grid.Column="0"/>
+
+                            <Label Text="Purchases Orders" TextColor="Black"
+                                       Padding="10,0,0,0"
+                                       VerticalTextAlignment="Center"
+                                       Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                       Grid.Column="2"
+                                       HeightRequest="10"
+                                       />
+                        </Grid>
+                    </Frame>
+                    
+                    
+                    <Frame Grid.Row="{OnIdiom Phone=1, Tablet=0}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Shipping_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="shipping.png"
+                                       HeightRequest="40"
+                                       Grid.Column="0"/> 
+
+                            <Label Text="Shipping Manifest" TextColor="Black"
+                                       Padding="10,0,0,0"
+                                       VerticalTextAlignment="Center"
+                                       Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                       Grid.Column="2"
+                                       HeightRequest="10"
+                                       />
+                        </Grid>
+                    </Frame>
+
+                    <Frame Grid.Row="{OnIdiom Phone=2, Tablet=1}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Receiving_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="receiving.png"
+                                       HeightRequest="40"
+                                       Grid.Column="0"/>
+
+                            <Label Text="Receiving" TextColor="Black"
+                                       Padding="10,0,0,0"
+                                       VerticalTextAlignment="Center"
+                                       Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                       Grid.Column="2"
+                                       HeightRequest="10"
+                                       />
+                        </Grid>
+                    </Frame>
+
+                    <Frame Grid.Row="{OnIdiom Phone=3, Tablet=1}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Inventory_tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="invenrotry.png"
+                                   HeightRequest="40"
+                                   Grid.Column="0"/>
+                            <Label Text="Inventory" TextColor="Black"
+                                   Padding="10,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                   Grid.Column="2"
+                                   HeightRequest="10"
+                                   />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame Grid.Row="{OnIdiom Phone=4, Tablet=2}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Item_Manager_tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="itemManager.png"
+                                   HeightRequest="40"
+                                   Grid.Column="0"/>
+
+                            <Label Text="Item Manager" TextColor="Black"
+                                   Padding="10,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                   Grid.Column="2"
+                                   HeightRequest="10"
+                                   />
+                        </Grid>
+                    </Frame>
+
+                    <Frame Grid.Row="{OnIdiom Phone=5, Tablet=2}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Order_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="pricing.png"
+                                   HeightRequest="40"
+                                   Grid.Column="0"/>
+
+                            <Label Text="Orders" TextColor="Black"
+                                   Padding="10,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                   Grid.Column="2"
+                                   HeightRequest="10"
+                                   />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=6, Tablet=3}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Expence_Tapped" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="pricing.png"
+                                   HeightRequest="40"
+                                   Grid.Column="0"/>
+
+                            <Label Text="Expenses" TextColor="Black"
+                                   Padding="10,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                   Grid.Column="2"
+                                   HeightRequest="10"
+                                   />
+                        </Grid>
+                    </Frame> 
+                    <Frame Grid.Row="{OnIdiom Phone=7, Tablet=3}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Out_Of_Stock" />
+                        </Frame.GestureRecognizers>
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="productToBuy.png"
+                                   HeightRequest="40"
+                                   Grid.Column="0"/>
+
+                            <Label Text="Cargots" TextColor="Black"
+                                   Padding="10,0,0,0"
+                                   VerticalTextAlignment="Center"
+                                   Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                   Grid.Column="2"
+                                   HeightRequest="10"
+                                   />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame Grid.Row="{OnIdiom Phone=8, Tablet=4}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="PurchaseOrder_Lome" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="purchaseorders.png"
+                                           HeightRequest="40"
+                                           Grid.Column="0"/>
+
+                            <Label Text="Purchases Lome" TextColor="Black"
+                                           Padding="10,0,0,0"
+                                           VerticalTextAlignment="Center"
+                                           Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                           Grid.Column="2"
+                                           HeightRequest="10"
+                                           />
+                        </Grid>
+                    </Frame>
+                    
+                    <Frame Grid.Row="{OnIdiom Phone=9, Tablet=4}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="Purchase_Cart" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="cart_purchase.png"
+                                           HeightRequest="40"
+                                           Grid.Column="0"/>
+
+                            <Label Text="Purchases Cart" TextColor="Black"
+                                           Padding="10,0,0,0"
+                                           VerticalTextAlignment="Center"
+                                           Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                           Grid.Column="2"
+                                           HeightRequest="10"
+                                           />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=10, Tablet=5}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="cart_purchase.png"
+                                           HeightRequest="40"
+                                           Grid.Column="0"/>
+
+                            <Label Text="Urgents Products" TextColor="Black"
+                                           Padding="10,0,0,0"
+                                           VerticalTextAlignment="Center"
+                                           Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                                           Grid.Column="2"
+                                           HeightRequest="10"
+                                           />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=11, Tablet=5}" Grid.Column="{OnIdiom Phone=0, Tablet=1}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="cart_purchase.png"
+                       HeightRequest="40"
+                       Grid.Column="0"/>
+
+                            <Label Text="Save For Later" TextColor="Black"
+                       Padding="10,0,0,0"
+                       VerticalTextAlignment="Center"
+                       Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                       Grid.Column="2"
+                       HeightRequest="10"
+                       />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=12, Tablet=6}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="cart_purchase.png"
+                              HeightRequest="40"
+                              Grid.Column="0"/>
+
+                              <Label Text="Carts Validation" TextColor="Black"
+                              Padding="10,0,0,0"
+                              VerticalTextAlignment="Center"
+                              Grid.Column="1"/>
+
+                              <Image Source="arrowright.png"
+                              Grid.Column="2"
+                              HeightRequest="10"
+                              />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=13, Tablet=6}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_3" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="itemManager.png"
+                          HeightRequest="40"
+                          Grid.Column="0"/>
+
+                            <Label Text="Expiration Products" TextColor="Black"
+                              Padding="10,0,0,0"
+                              VerticalTextAlignment="Center"
+                              Grid.Column="1"/>
+
+                            <Image Source="arrowright.png"
+                              Grid.Column="2"
+                              HeightRequest="10"
+                              />
+                        </Grid>
+                    </Frame>
+                    <Frame Grid.Row="{OnIdiom Phone=14, Tablet=7}" Grid.Column="{OnIdiom Phone=0, Tablet=0}">
+                        <Frame.GestureRecognizers >
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_5" />
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="50,*,10">
+                            <Image Source="rayon.png"
+                           HeightRequest="40"
+                           Grid.Column="0"/>
+
+                            <Label Text="Online Inventory" TextColor="Black"
+                               Padding="10,0,0,0"
+                               VerticalTextAlignment="Center"
+                               Grid.Column="1"/>
+
+                                <Image Source="arrowright.png"
+                               Grid.Column="2"
+                               HeightRequest="10"
+                               />
+                        </Grid>
+                    </Frame>
+
+                </Grid>
+            </ScrollView>
+
+            <Expander Rotation="180" HorizontalOptions="End"
+                      AbsoluteLayout.LayoutBounds="1,1"
+                      AbsoluteLayout.LayoutFlags="PositionProportional"
+                      Margin="20"
+                      x:Name="fab"
+                      ExpandAnimationLength="1"
+                      CollapseAnimationLength="1"
+                      VerticalOptions="End">
+
+                <Expander.Header>
+                    <Button Text="+" TextColor="White"
+                            FontSize="Large" 
+                            HeightRequest="{OnIdiom Phone=60, Tablet=80}"
+                            WidthRequest="{OnIdiom Phone=60, Tablet=80}"
+                            CornerRadius="40"
+                            BackgroundColor="DodgerBlue"
+                            Clicked="ExpandBtn_Clicked"
+                            HorizontalOptions="Start"
+                            Rotation="180">
+
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button"
+                                                 Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                                 Value="True">
+                                <Setter Property="Text" Value="x"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                            </DataTrigger>
+
+                        </Button.Triggers>
+                    </Button>
+                </Expander.Header>
+
+                <Grid RowDefinitions="Auto, Auto" RowSpacing="30">
+
+                    <Grid Grid.Row="0" ColumnDefinitions="Auto, Auto" Margin="5,30,0,0">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NewOrder_Tapped" />
+                        </Grid.GestureRecognizers>
+
+                        <Label Text="New Purchase Order"
+                                       Grid.Column="1"
+                                       Grid.Row="0"
+                                       FontSize="15"
+                                       Rotation="180"
+                                       BackgroundColor="Black"
+                                       Opacity="0.8"
+                                       Padding="10"
+                                       TextColor="White" />
+
+                        <pk:PancakeView  Grid.Row="0"
+                                Grid.Column="0"
+                                CornerRadius="100"
+                                Padding="5"
+                                BackgroundColor="DodgerBlue"
+                                Rotation="180">
+
+                            <ImageButton Source="newPo.png"                                             
+                                             WidthRequest="30"
+                                             HeightRequest="30"
+                                             BackgroundColor="Transparent"/>
+                        </pk:PancakeView>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto"
+                          Margin="5,0,0,0">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="NewShipping_Tapped" />
+                        </Grid.GestureRecognizers>
+
+                        <Label Text="New Shipping"
+                                   Grid.Row="0" Grid.Column="1"
+                                   FontSize="15" Rotation="180"
+                                   BackgroundColor="Black"
+                                   Opacity="0.8" Padding="10"
+                                   TextColor="White" />
+
+                        <pk:PancakeView Grid.Column="0"
+                                        Grid.Row="0"
+                                        Padding="5"
+                                        CornerRadius="100"
+                                        BackgroundColor="DodgerBlue"
+                                        Rotation="180">
+
+                            <ImageButton Source="newshipping.png"                                                                                      
+                                             WidthRequest="30" HeightRequest="30"
+                                             BackgroundColor="Transparent" />
+                        </pk:PancakeView>
+                    </Grid>
+
+                </Grid>
+
+            </Expander>
+
+
+            <StackLayout x:Name="search_init" IsVisible="False" BackgroundColor="Black" Opacity="0.8"  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Grid RowDefinitions="Auto, Auto" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <ActivityIndicator Color="DodgerBlue" IsRunning="True" IsVisible="True" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"   />
+                    <Label Grid.Row="1" TextColor="White" Text="Search initialization please wait..." HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                </Grid>
+            </StackLayout>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

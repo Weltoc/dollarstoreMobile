@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage  xmlns:rg="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+               xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+               xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+               xmlns:local="clr-namespace:DollarStore.Common.Core.PingToZoom" 
+               xmlns:cm="clr-namespace:DollarStore.Common.Converter"
+               x:Class="DollarStore.Common.Report.ModalReportBox">
+    
+    <rg:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"
+            />
+    </rg:PopupPage.Animation>
+
+    <rg:PopupPage.Resources>
+        <ResourceDictionary>
+            <cm:ImageNameConverter x:Key="ImageSourceKey" />
+            <cm:ExpirationDateTimeConveter x:Key="DateToString" />
+        </ResourceDictionary>
+        
+        <DataTemplate x:Key="PriceTemplate">
+            <Frame Grid.Column="2" BackgroundColor="#F0F2F2">
+                <Grid RowDefinitions="Auto,Auto">
+                    <Label HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span  Text="{Binding VendorName}"
+                                    TextColor="Black"
+                                    FontSize="13"
+                                    FontAttributes="Bold" />
+                                <Span  Text=" " />
+                                <Span  Text="{Binding storeName} " FontSize="11"/>
+                                
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Grid.Row="1"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Sansation-Regular.ttf#Sansation-Regular">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span  Text="{Binding price}"  TextColor="Black"
+                                    FontSize="12"
+                                    FontAttributes="Bold"/>
+                                <Span  Text=" $"  TextColor="Black"
+                                    FontSize="13"
+                                    FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+            </Frame>
+        </DataTemplate>
+        
+                
+        <DataTemplate x:Key="ExpirationTemplate">
+            <Frame Grid.Column="2" BackgroundColor="#F0F2F2">
+                <Grid RowDefinitions="Auto,Auto">
+                    <Label HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Text="Expiration date" />
+                    <Label Grid.Row="1" HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span  Text="{Binding ., Converter={StaticResource DateToString}}"
+                                    TextColor="Black"
+                                    FontSize="13"
+                                    FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+            </Frame>
+        </DataTemplate>
+    </rg:PopupPage.Resources>
+
+
+    <Grid 
+            BackgroundColor="Transparent"
+            HeightRequest="{OnIdiom Phone='550', Tablet='650'}"
+            VerticalOptions="Start"
+            Margin="20"
+            RowDefinitions="*, Auto, Auto"
+            HorizontalOptions="Center">
+
+        <Frame
+            VerticalOptions="Center"
+            Padding="0"
+            CornerRadius="0"
+            HorizontalOptions="Center">
+
+            <Grid Padding="20">
+                <local:PinchToZoomContainer>
+                    <local:PinchToZoomContainer.Content>
+                        <Image  Source="{Binding ImageUrl, Converter={StaticResource ImageSourceKey}}"
+                                    x:Name="imageurl"
+                                    HeightRequest="{OnIdiom Phone='480', Tablet='580'}"
+                                    WidthRequest="{OnIdiom Phone='480', Tablet='580'}"
+                                    Aspect="AspectFit"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="Center" />
+                    </local:PinchToZoomContainer.Content>
+                </local:PinchToZoomContainer>
+
+                <Label 
+                        Text="X"
+                        TextColor="Red"
+                        FontSize="Large"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="0,-20,-20,-20"
+                        Padding="10" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Frame>
+
+        <ScrollView Grid.Row="1" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    HorizontalScrollBarVisibility="Never"
+                    Orientation="Horizontal">
+
+            <Grid RowDefinitions="Auto, Auto">
+
+                <StackLayout Orientation="Horizontal" Spacing="10"
+                         BindableLayout.ItemsSource="{Binding prices}"
+                         BindableLayout.ItemTemplate="{StaticResource PriceTemplate}" />
+
+                <StackLayout Orientation="Horizontal" Spacing="10" Grid.Row="1"
+                         BindableLayout.ItemsSource="{Binding Expirables}"
+                         BindableLayout.ItemTemplate="{StaticResource ExpirationTemplate}" />
+            </Grid>
+
+        </ScrollView>
+    </Grid>
+</rg:PopupPage>

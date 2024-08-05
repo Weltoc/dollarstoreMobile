@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cm="clr-namespace:DollarStore.Common.Converter" 
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+             x:Class="DollarStore.Common.Core.SharedView.DetailPriceVendorPortrait">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <cm:DateTimeConverter x:Key="DateTimeToString"/>
+        </ResourceDictionary>
+
+        <DataTemplate x:Key="oneGrid" >
+            <Frame Padding="5" Margin="0" BorderColor="LightGray">
+                <Grid RowDefinitions="Auto, *">
+                    <Label Text="{Binding Name}" HorizontalOptions="Center" Padding="0, 10,0,10" FontSize="18" FontAttributes="Bold" TextColor="Black" />
+                    <dg:DataGrid ItemsSource="{Binding Prices}" Grid.Row="1" 
+                                 SelectionEnabled="False" RowHeight="50"
+                                                 HeaderHeight="45" BorderColor="#E5E4E2"
+                                                 HeaderTextColor="White"                                                
+                                                 VerticalOptions="FillAndExpand"
+                                                 HeaderBackground="#53565e">
+
+                        <dg:DataGrid.Columns>
+                            <dg:DataGridColumn Title="Code" PropertyName="ItemCode" Width="70"/>
+                            <dg:DataGridColumn Title="Price" PropertyName="Price" Width="70">
+                                <dg:DataGridColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ContentView HorizontalOptions="Fill" VerticalOptions="Fill">
+                                            <Label  
+                                                           HorizontalOptions="Center"
+                                                           VerticalOptions="Center" 
+                                                           TextColor="Black">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="$ "/>
+                                                        <Span Text="{Binding}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </dg:DataGridColumn.CellTemplate>
+                            </dg:DataGridColumn>
+                            <dg:DataGridColumn Title="Update At" PropertyName="UpdateAt" Width="0.1*" />
+                        </dg:DataGrid.Columns>
+
+                        <dg:DataGrid.RowsBackgroundColorPalette>
+                            <dg:PaletteCollection>
+                                <Color>#F2F2F2</Color>
+                                <Color>#FFFFFF</Color>
+                            </dg:PaletteCollection>
+                        </dg:DataGrid.RowsBackgroundColorPalette>
+
+                    </dg:DataGrid>
+                </Grid>
+            </Frame>
+        </DataTemplate>
+
+    </ContentView.Resources>
+
+
+    <StackLayout>
+        <CollectionView
+               ItemsSource="{Binding ItemD.ItemVendors.Values}"
+               ItemTemplate="{StaticResource Key=oneGrid}"
+         >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout  Orientation="Vertical" Span="{OnIdiom Phone=1,Tablet=3}" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <StackLayout >
+                    <Label Text="Empty"  FontSize="Body"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,0,20"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+    </StackLayout>
+</ContentView>

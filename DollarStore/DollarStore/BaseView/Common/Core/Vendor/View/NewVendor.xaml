@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DollarStore.Common.Core.Vendor.View.NewVendor"
+             Visual="Material">
+    <ContentPage.Content>
+        <StackLayout Padding="10,35,10,10">
+
+            <Label Text="Add new Vendor"
+                   FontSize="25"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   HorizontalOptions="CenterAndExpand"
+                   Padding="15"
+                   HorizontalTextAlignment="Center" />
+
+            <Entry x:Name="vendorName" 
+                   Placeholder="Vendor Name"
+                   TextChanged="VendorName_TextChanged"/>
+            
+            <Entry x:Name="locationName"
+                   Placeholder="Location"
+                   TextChanged="LocationName_TextChanged"/>
+            
+            <Button Text=" ADD Vendor"
+                    x:Name="addVendor"
+                    FontSize="15"
+                    Margin="5,20,5,10"
+                    Padding="5"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="DodgerBlue"
+                    Clicked="AddVendor_Clicked"
+                    />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
