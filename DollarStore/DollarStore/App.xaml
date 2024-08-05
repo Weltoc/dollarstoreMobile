@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             mc:Ignorable="d"
+             x:Class="DollarStore.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Sansation-Regular.ttf#Sansation-Regular"/>
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="PlaceholderColor" Value="LightGray"/>
+                <Style.Triggers>
+                    <Trigger TargetType="Editor" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="LightGray"/>
+                        <Setter Property="Background" Value="LightGray" />
+                        <Setter Property="PlaceholderColor" Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="TitleColor" Value="LightGray"/>
+                <Style.Triggers>
+                    <Trigger TargetType="Picker" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="LightGray"/>
+                        <Setter Property="Background" Value="#DCEAFF" />
+                        <Setter Property="TitleColor" Value="LightGray"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="PlaceholderColor" Value="LightGray"/>
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="Background" Value="#DCEAFF" />
+                        <Setter Property="PlaceholderColor" Value="LightGray" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                  xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                  xmlns:local1="clr-namespace:DollarStore.BaseView"
+                  xmlns:auth="clr-namespace:DollarStore.View.Authentication"
+                  xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                  xmlns:myview="clr-namespace:DollarStore.View" xmlns:pk="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                  mc:Ignorable="d"
+             x:Class="DollarStore.MainPage"
+             Visual="Material"
+             MasterBehavior="Popover"
+             >
+    
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <StackLayout>
+                
+                <Grid Padding="20,30,0,20" BackgroundColor="DodgerBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    
+                    <controls:CircleImage x:Name="userProfilImage"  Source="dollarstore.png" Grid.Row="0"
+                                          HorizontalOptions="StartAndExpand"
+                                          Aspect="AspectFill"
+                                          WidthRequest="60"
+                                          HeightRequest="60"
+                                          BackgroundColor="Transparent"/>
+
+                    <Label x:Name="userProfilName" Text="" FontSize="16"
+                                    Grid.Row="1" TextColor="White"
+                                   HorizontalOptions="StartAndExpand"/>
+
+                    <Label x:Name="userProfilEmail" Text="" Grid.Row="2"
+                           FontSize="14"
+                            TextColor="White"
+                           HorizontalOptions="StartAndExpand"/>
+                    <pk:PancakeView Grid.Row="3" 
+                                    HorizontalOptions="Start"
+                                    BackgroundColor="Transparent" 
+                                    CornerRadius="10">
+                        <Grid RowDefinitions="Auto, Auto" RowSpacing="1">
+                            <BoxView BackgroundColor="Black"                                   
+                                     CornerRadius="10"
+                                     Grid.RowSpan="2"
+                                     VerticalOptions="Start"
+                                     HeightRequest="32"
+                                     Opacity="0.8" />
+  <!--region Env-->                          
+                            <Label x:Name="projectProfile" Text=""  
+                                   Margin="10,5,10,7"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="StartAndExpand"/>
+                           
+  <!--region Env-->                          
+                            <Label x:Name="projecVersion" Text=""  
+                                   Grid.Row="1"
+                                   Margin="10,5,10,7"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="StartAndExpand"/>
+                        </Grid>
+<!--end region-->
+                    </pk:PancakeView>
+
+                </Grid>
+
+                <StackLayout VerticalOptions="FillAndExpand" Padding="10">
+                    <myview:MasterList x:Name="masterlistitem"/>
+                </StackLayout>
+                
+                <StackLayout VerticalOptions="EndAndExpand">
+                    <auth:Logout />
+                </StackLayout>
+                
+            </StackLayout>
+
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local1:BaseHomePage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
